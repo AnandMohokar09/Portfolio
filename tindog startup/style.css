@@ -1,0 +1,120 @@
+body {
+    font-family: 'Montserrat';
+    overflow-x: hidden;
+}
+/* first section */
+h2{
+    font-family: 'montserrat-bold';
+    font-size: 3rem;
+    line-height: 1.5;
+}
+h3 {
+    font-family: 'montserrat-bold';
+}
+.first-container{
+    background-color: #ff4c68;
+    color: #fff;
+}
+
+.first-container .navbar-brand{
+    font-family: 'ubuntu';
+    font-weight: bold;
+    font-size: 3rem;
+   
+}
+.container-fuid{
+    padding:3% 15% ;
+}
+
+.first-container h1{
+    font-family: 'montserrat', sans-serif;
+    font-size: 4rem;
+    line-height: 1;
+}
+
+.first-container nav{
+    padding-bottom: 4.5rem;
+}
+.nav-item{
+    padding: 0 18px;
+}
+.nav-link{
+    font-family:1.2rem;
+    font-family: montserrat-light;
+
+}
+.col-lg-6 col-md col-sm button {
+    margin: 5% 5% 5% 0;
+}
+
+
+ .title-image{
+    width:50%;
+    transform: rotate(25deg);
+    filter:drop-shadow(20px 7px 7px black);
+    position: absolute;
+ }
+
+/*sencond container*/
+
+.second-container{
+    padding-left: 15%;
+    position: relative;
+    z-index: 3;
+    
+}
+
+.feature-box{
+    text-align: center;
+    padding:5%;
+    background-color: #fff;
+   
+
+}
+
+
+p{
+    color: #8f8f8f;
+}
+
+.icon{
+    color:#ef8172;
+    margin-bottom: 1rem;
+
+}
+
+.icon:hover{
+    color:#ff4c68 ;
+}
+
+/* testomonial */
+
+.fourth-container{
+    padding: 7% 15%;
+    text-align: center;
+    background-color: #ff4c68;
+    color: white;
+}
+
+.fourth-container h2{
+    font-size: 3rem;
+}
+.dog_image{
+     width: 20%;
+     border-radius: 100%;
+     margin: 40px;
+}
+
+/* fees*/
+
+.fees{
+    text-align: center;
+    padding-top: 5%;
+    font-size: 3rem;
+}
+
+@media (max-width:1200px){
+   .title-image{
+    position: static;
+   }
+}
