@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voting Machine By Finger Print Module</title>
+  <link rel="stylesheet" href="voting.css">
+</html>
+    
+
+<body>
+  <section class="head">
+    <header class="heading">
+      <h1>Voting Machine By Finger Print Module</h1>
+    </header>
+    <div class="voting_img">
+      <img src="voting.jpg" alt="">
+    </div>
+
+    <div class="summury">
+      <p>In the realm of modern elections, Electronic Voting Machines have become ubiquitous, streamlining the
+        voting process by digitizing ballot registration.
+        However, the paramount concern remains security, particularly in preventing instances of double voting
+        and eliminating the potential for fraudulent practices.
+        In response to this challenge, we present the FingerPrint Based Biometric Voting Machine using Arduino.
+        This innovative system leverages biometric authentication through fingerprint recognition,
+        providing a secure and tamper-resistant method to authorize voters. By linking each vote to a unique
+        fingerprint, the technology ensures the integrity of the electoral process and effectively combats the
+        threat of unauthorized or duplicate voting.
+        Join us in exploring this cutting-edge application of Arduino technology to enhance the security and
+        reliability of the voting experience.</p>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="components">
+      <h3>Required Components :</h3>
+      <ol class="list">
+        <li>Arduino Uno</li>
+        <li>Finger Print Sensor Module</li>
+        <li>Push Buttons</li>
+        <li>LEDs - 2</li>
+        <li>1K Resistor - 3</li>
+        <li>2.2K Resistor</li>
+        <li>Power</li>
+        <li>Connecting Wires</li>
+        <li>Buzzer</li>
+        <li>16x2 LCD</li>
+        <li>Bread-Board / PCB</li>
+      </ol>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sensor">
+      <h3> Finger Print Sensor Module in Voting Machine :</h3>
+
+      <p>The Finger Print Sensor Module, or Finger Print Scanner, serves as a crucial component in this system,
+        tasked with capturing the unique fingerprint image.
+        Following capture, the module undertakes the intricate process of transforming the fingerprint image
+        into a corresponding template.
+        This template is then meticulously preserved in the module's memory under a designated ID, a task
+        overseen and directed by the Arduino.
+        Every step of this intricate operation, from image acquisition to template conversion and storage
+        location assignment, is orchestrated by the Arduino.
+        In essence, the Arduino assumes command, ensuring the seamless execution of each facet of the
+        fingerprint recognition and storage process.</p>
+
+      <img src="R307.jpg" alt="">
+
+      <p> In this FingerPrint Voting Machine Circuit, the authentication process is facilitated by the Finger
+        Print Sensor Module, which captures and processes the user's fingerprint input.
+        The circuit incorporates 5 push buttons, each serving a distinct purpose: Match, Enroll/Back, Delete/OK,
+        UP, and Down. Notably, the Enroll and Delete keys possess dual functionality.
+        The Enroll key functions both as the trigger for enrolling new fingerprints and as a back button.
+        If a user decides not to proceed after pressing the Enroll key during the ID/location selection phase,
+        pressing it again acts as a back button, allowing the user to navigate to the previous step.
+
+        Similarly, the DEL/OK key also has a dual role. After selecting the ID or location using the UP and DOWN
+        keys, pressing DEL/OK serves as confirmation (OK) to proceed with the chosen ID or location.
+        Meanwhile, the Match key is pivotal for voters intending to cast their votes. Before voting, the user
+        must authenticate themselves by placing their finger on the Finger Print Sensor.
+        Successful authentication grants the user the privilege to vote.
+
+        This design intricately weaves together these functions, ensuring a user-friendly and efficient
+        experience in the fingerprint-based voting process.
+        The Enroll and Delete keys offer flexibility, serving both primary functions seamlessly, while the Match
+        key acts as the gateway to the voting process,
+        ensuring the security and legitimacy of each vote cast.
+      </p>
+      <span>Data-Sheet of R307 FingerPrint Module :</span>
+      <a href="r307_datasheet.pdf" download="datasheet of r307"> <button class="datasheet">Download</button></a>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="working">
+      <h3>Working :</h3>
+
+      <p>
+        The operational flow of the Biometric Voting System may initially seem intricate for beginners. To
+        initiate the system, a user is required to enroll voters' fingerprints,
+        with a set maximum limit of 25 voters in this particular code. The process begins with the user pressing
+        the 'ENROLL' key,
+        prompting the LCD to request the entry of a unique location or ID for storing the fingerprint data.
+        Using the 'UP/DOWN' keys, the user selects the desired location and confirms the choice by pressing the
+        'OK' (DEL) key.
+      </p>
+      <p class="text">
+        </br>Subsequently, the LCD instructs the user to place their finger over the fingerprint module.
+        Following this prompt, the user complies,
+        allowing the system to capture an image of the fingerprint. The system then prompts the user to remove
+        their finger from the module,
+        followed by another request to place the finger once more. This iterative process ensures the system
+        captures multiple perspectives of the fingerprint, enhancing accuracy.</br>
+
+        </br>The fingerprint module processes the collected images, converting them into templates that are then
+        stored in the module's memory under the selected ID.
+        With this, the voter is successfully registered, gaining the authorization to cast their vote. This
+        systematic approach ensures the enrollment of all voters, securing the integrity of the Biometric Voting
+        System.</br>
+
+        </br>Now if the user wants to remove or delete any of stored ID then he/she need to press DEL key,
+        after pressing DEL key, LCD will ask for select location means select ID that to be deleted.
+        Now user needs to select ID and press OK key (same DEL key).
+        Now LCD will let you know that finger has been deleted successfully.</p>
+
+
+      <img src="flowchart.jpg" alt="">
+    </div>
+
+  </section>
+
+  <section>
+    <div class="process">
+      <h3>Voting Process :</h3>
+      <p>
+        When a user desires to cast their vote, the initiation begins with the pressing of the Match key.
+        Subsequently, a buzzer emits a distinctive beep, accompanied by the illumination of an LED, signaling
+        the start of the authentication process. Simultaneously, the LCD prompts the user to position their
+        finger over the fingerprint module. The Arduino extends three attempts for the user to place their
+        finger successfully.</br>
+
+        </br>Upon fingerprint placement, the module captures the fingerprint image, initiating the search for a
+        matching ID within the system. If the system identifies a matching fingerprint ID, the LCD promptly
+        displays 'Authorized Voter,' signifying the user's eligibility to cast their vote. At this juncture, the
+        system transitions to the voting stage, indicated by the activation of a Green LED. The voter can now
+        make their candidate selections by pressing the corresponding keys on the RED breadboard.</br>
+
+        </br> In the event that a previously authorized voter attempts to cast another vote, the system intelligently
+        recognizes this and displays 'Already Voted' on the LCD. Simultaneously, a buzzer emits a 5-second beep,
+        emphasizing the system's prohibition against multiple votes from the same individual. Additionally, if a
+        non-registered user attempts to vote, the fingerprint module fails to detect their ID, prompting the LCD
+        to display 'No Fingerprint Found.' This stringent authentication process ensures the integrity of the
+        voting system by preventing unauthorized or duplicate votes.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="diagram">
+      <h3>Circuit Diagram :</h3>
+      <img src="circuit_diagram.png" alt="">
+
+    </div>
+  </section>
+
+  <section>
+    <div class="code">
+      <h3>Code :</h3>
+      <button id="copyButton">Copy</button>
+      <pre id="codeContent">
+                #include<EEPROM.h>
+
+                    #include<LiquidCrystal.h>
+                    
+                    LiquidCrystal lcd(13,12,11,10,9,8);
+                    
+                     
+                    
+                    #include <Adafruit_Fingerprint.h>
+                    
+                    uint8_t id;
+                    
+                    Adafruit_Fingerprint finger = Adafruit_Fingerprint(&Serial);
+                    
+                     
+                    
+                    #define enroll 14
+                    
+                    #define del 15
+                    
+                    #define up 16
+                    
+                    #define down 17
+                    
+                    #define match 18
+                    
+                    #define indVote 6
+                    
+                     
+                    
+                    #define sw1 5
+                    
+                    #define sw2 4
+                    
+                    #define sw3 3
+                    
+                    #define resultsw 2
+                    
+                    #define indFinger 7
+                    
+                    #define buzzer 19
+                    
+                    #define records 25
+                    
+                    int vote1,vote2,vote3;
+                    
+                     
+                    
+                    int flag;
+                    
+                     
+                    
+                    void setup() 
+                    
+                    {
+                    
+                        delay(1000);
+                    
+                        pinMode(enroll, INPUT_PULLUP);
+                    
+                        pinMode(up, INPUT_PULLUP); 
+                    
+                        pinMode(down, INPUT_PULLUP); 
+                    
+                        pinMode(del, INPUT_PULLUP);
+                    
+                        pinMode(match, INPUT_PULLUP);
+                    
+                        pinMode(sw1, INPUT_PULLUP); 
+                    
+                        pinMode(sw2, INPUT_PULLUP);
+                    
+                        pinMode(sw3, INPUT_PULLUP);
+                    
+                        pinMode(resultsw, INPUT_PULLUP);
+                    
+                        pinMode(buzzer, OUTPUT);
+                    
+                        pinMode(indVote, OUTPUT);
+                    
+                        pinMode(indFinger, OUTPUT);
+                    
+                     
+                    
+                    lcd.begin(16,2);
+                    
+                      if(digitalRead(resultsw) ==0)
+                    
+                      {
+                    
+                           for(int i=0;i<records;i++)
+                    
+                              EEPROM.write(i+10,0xff);
+                    
+                           EEPROM.write(0,0);
+                    
+                           EEPROM.write(1,0);
+                    
+                           EEPROM.write(2,0);
+                    
+                           lcd.clear();
+                    
+                           lcd.print("System Reset");
+                    
+                           delay(1000);
+                    
+                      }
+                    
+                        
+                    
+                        lcd.clear();
+                    
+                        lcd.print("Voting Machine");
+                    
+                        lcd.setCursor(0,1);
+                    
+                        lcd.print("by Finger Print");
+                    
+                        delay(2000);
+                    
+                        lcd.clear();
+                    
+                        lcd.print("Circuit Digest");
+                    
+                        lcd.setCursor(0,1);
+                    
+                        lcd.print("Saddam Khan");
+                    
+                        delay(2000);
+                    
+                     
+                    
+                      if(EEPROM.read(0) == 0xff)
+                    
+                       EEPROM.write(0,0);
+                    
+                     
+                    
+                         if(EEPROM.read(1) == 0xff)
+                    
+                       EEPROM.write(1,0);
+                    
+                     
+                    
+                         if(EEPROM.read(1) == 0xff)
+                    
+                       EEPROM.write(1,0);
+                    
+                     
+                    
+                       
+                    
+                          
+                    
+                        //finger.begin(57600);
+                    
+                        Serial.begin(57600);
+                    
+                        lcd.clear();
+                    
+                        lcd.print("Finding Module");
+                    
+                        lcd.setCursor(0,1);
+                    
+                        delay(1000);
+                    
+                        if (finger.verifyPassword()) 
+                    
+                        {
+                    
+                          //Serial.println("Found fingerprint sensor!");
+                    
+                          lcd.clear();
+                    
+                          lcd.print("Found Module ");
+                    
+                          delay(1000);
+                    
+                        } 
+                    
+                        else 
+                    
+                        {
+                    
+                        //Serial.println("Did not find fingerprint sensor :(");
+                    
+                        lcd.clear();
+                    
+                        lcd.print("module not Found");
+                    
+                        lcd.setCursor(0,1);
+                    
+                        lcd.print("Check Connections");
+                    
+                        while (1);
+                    
+                        }
+                    
+                     
+                    
+                      lcd.clear();
+                    
+                      lcd.setCursor(0,0);
+                    
+                      lcd.print("Cn1");
+                    
+                      lcd.setCursor(4,0);
+                    
+                      lcd.print("Cn2");
+                    
+                      lcd.setCursor(8,0);
+                    
+                      lcd.print("Cn3");
+                    
+                      lcd.setCursor(12,0);
+                    
+                      lcd.print("Cn4");
+                    
+                     
+                    
+                      lcd.setCursor(0,1);
+                    
+                      vote1=EEPROM.read(0);
+                    
+                      lcd.print(vote1);
+                    
+                      lcd.setCursor(6,1);
+                    
+                      vote2=EEPROM.read(1);
+                    
+                      lcd.print(vote2);
+                    
+                      lcd.setCursor(12,1);
+                    
+                      vote3=EEPROM.read(2);
+                    
+                      lcd.print(vote3);
+                    
+                      delay(2000);
+                    
+                    }
+                    
+                     
+                    
+                    void loop() 
+                    
+                    {
+                    
+                     lcd.setCursor(0,0);
+                    
+                     lcd.print("Press Match Key ");
+                    
+                     lcd.setCursor(0,1);
+                    
+                     lcd.print("to start system");
+                    
+                     
+                    
+                     digitalWrite(indVote, LOW);
+                    
+                     digitalWrite(indFinger, LOW);
+                    
+                     if(digitalRead(match)==0)
+                    
+                     {
+                    
+                      digitalWrite(buzzer, HIGH);
+                    
+                      delay(200);
+                    
+                      digitalWrite(buzzer, LOW);
+                    
+                      digitalWrite(indFinger, HIGH);
+                    
+                      for(int i=0;i<3;i++)
+                    
+                      {
+                    
+                         lcd.clear();
+                    
+                        lcd.print("Place Finger");
+                    
+                        delay(2000);
+                    
+                        int result=getFingerprintIDez();
+                    
+                        if(result>=0)
+                    
+                        {
+                    
+                          flag=0;
+                    
+                            for(int i=0;i<records;i++)
+                    
+                            {
+                    
+                              if(result == EEPROM.read(i+10))
+                    
+                              {
+                    
+                                 lcd.clear();
+                    
+                                  lcd.print("Authorised Voter");
+                    
+                                  lcd.setCursor(0,1);
+                    
+                                  lcd.print("Please Wait....");
+                    
+                                  delay(1000);
+                    
+                                  Vote();
+                    
+                                  EEPROM.write(i+10, 0xff);
+                    
+                                  flag=1;
+                    
+                                  return;
+                    
+                              }
+                    
+                            }
+                    
+                     
+                    
+                            if(flag == 0)
+                    
+                            {
+                    
+                            lcd.clear();
+                    
+                            lcd.print("Already Voted");
+                    
+                            //lcd.setCursor(0,1);
+                    
+                            //lcd.print("")
+                    
+                            digitalWrite(buzzer, HIGH);
+                    
+                            delay(5000);
+                    
+                            digitalWrite(buzzer, LOW);
+                    
+                            return;
+                    
+                            }
+                    
+                         }
+                    
+                       }
+                    
+                       lcd.clear();
+                    
+                     }
+                    
+                     checkKeys();
+                    
+                     delay(1000);
+                    
+                    }
+                    
+                     
+                    
+                    void checkKeys()
+                    
+                    {
+                    
+                       if(digitalRead(enroll) == 0)
+                    
+                       {
+                    
+                        lcd.clear();
+                    
+                        lcd.print("Please Wait");
+                    
+                        delay(1000);
+                    
+                        while(digitalRead(enroll) == 0);
+                    
+                        Enroll();
+                    
+                       }
+                    
+                     
+                    
+                       else if(digitalRead(del) == 0)
+                    
+                       {
+                    
+                        lcd.clear();
+                    
+                        lcd.print("Please Wait");
+                    
+                        delay(1000);
+                    
+                        delet();
+                    
+                       }  
+                    
+                    }
+                    
+                     
+                    
+                    void Enroll()
+                    
+                    {
+                    
+                       int count=0;
+                    
+                       lcd.clear();
+                    
+                       lcd.print("Enter Finger ID:");
+                    
+                       
+                    
+                       while(1)
+                    
+                       {
+                    
+                        lcd.setCursor(0,1);
+                    
+                         lcd.print(count);
+                    
+                         if(digitalRead(up) == 0)
+                    
+                         {
+                    
+                           count++;
+                    
+                           if(count>25)
+                    
+                           count=0;
+                    
+                           delay(500);
+                    
+                         }
+                    
+                     
+                    
+                         else if(digitalRead(down) == 0)
+                    
+                         {
+                    
+                           count--;
+                    
+                           if(count<0)
+                    
+                           count=25;
+                    
+                           delay(500);
+                    
+                         }
+                    
+                         else if(digitalRead(del) == 0)
+                    
+                         {
+                    
+                              id=count;
+                    
+                              getFingerprintEnroll();
+                    
+                              for(int i=0;i<records;i++)
+                    
+                              {
+                    
+                                if(EEPROM.read(i+10) == 0xff)
+                    
+                                {
+                    
+                                  EEPROM.write(i+10, id);
+                    
+                                  break;
+                    
+                                }
+                    
+                              }
+                    
+                              return;
+                    
+                         }
+                    
+                     
+                    
+                           else if(digitalRead(enroll) == 0)
+                    
+                         {        
+                    
+                              return;
+                    
+                         }
+                    
+                     }
+                    
+                    }
+                    
+                     
+                    
+                    void delet()
+                    
+                    {
+                    
+                       int count=0;
+                    
+                       lcd.clear();
+                    
+                       lcd.print("Enter Finger ID");
+                    
+                       
+                    
+                       while(1)
+                    
+                       {
+                    
+                        lcd.setCursor(0,1);
+                    
+                         lcd.print(count);
+                    
+                         if(digitalRead(up) == 0)
+                    
+                         {
+                    
+                           count++;
+                    
+                           if(count>25)
+                    
+                           count=0;
+                    
+                           delay(500);
+                    
+                         }
+                    
+                     
+                    
+                         else if(digitalRead(down) == 0)
+                    
+                         {
+                    
+                           count--;
+                    
+                           if(count<0)
+                    
+                           count=25;
+                    
+                           delay(500);
+                    
+                         }
+                    
+                         else if(digitalRead(del) == 0)
+                    
+                         {
+                    
+                              id=count;
+                    
+                              deleteFingerprint(id);
+                    
+                              for(int i=0;i<records;i++)
+                    
+                              {
+                    
+                                if(EEPROM.read(i+10) == id)
+                    
+                                {
+                    
+                                  EEPROM.write(i+10, 0xff);
+                    
+                                  break;
+                    
+                                }
+                    
+                              }
+                    
+                              return;
+                    
+                         }
+                    
+                           else if(digitalRead(enroll) == 0)
+                    
+                         {        
+                    
+                              return;
+                    
+                         }
+                    
+                     }
+                    
+                    }
+                    
+                     
+                    
+                    uint8_t getFingerprintEnroll() 
+                    
+                    {
+                    
+                      int p = -1;
+                    
+                      lcd.clear();
+                    
+                      lcd.print("finger ID:");
+                    
+                      lcd.print(id);
+                    
+                      lcd.setCursor(0,1);
+                    
+                      lcd.print("Place Finger");
+                    
+                      delay(2000);
+                    
+                      while (p != FINGERPRINT_OK)
+                    
+                      {
+                    
+                        p = finger.getImage();
+                    
+                        switch (p)
+                    
+                        {
+                    
+                        case FINGERPRINT_OK:
+                    
+                          //Serial.println("Image taken");
+                    
+                          lcd.clear();
+                    
+                          lcd.print("Image taken");
+                    
+                          break;
+                    
+                        case FINGERPRINT_NOFINGER:
+                    
+                          //Serial.println("No Finger");
+                    
+                          lcd.clear();
+                    
+                          lcd.print("No Finger");
+                    
+                          break;
+                    
+                        case FINGERPRINT_PACKETRECIEVEERR:
+                    
+                          //Serial.println("Communication error");
+                    
+                          lcd.clear();
+                    
+                          lcd.print("Comm Error");
+                    
+                          break;
+                    
+                        case FINGERPRINT_IMAGEFAIL:
+                    
+                          //Serial.println("Imaging error");
+                    
+                          lcd.clear();
+                    
+                          lcd.print("Imaging Error");
+                    
+                          break;
+                    
+                        default:
+                    
+                          //Serial.println("Unknown error");
+                    
+                           lcd.clear();
+                    
+                          lcd.print("Unknown Error");
+                    
+                          break;
+                    
+                        }
+                    
+                      }
+                    
+                     
+                    
+                      // OK success!
+                    
+                     
+                    
+                      p = finger.image2Tz(1);
+                    
+                      switch (p) {
+                    
+                        case FINGERPRINT_OK:
+                    
+                          //Serial.println("Image converted");
+                    
+                          lcd.clear();
+                    
+                          lcd.print("Image converted");
+                    
+                          break;
+                    
+                        case FINGERPRINT_IMAGEMESS:
+                    
+                          //Serial.println("Image too messy");
+                    
+                           lcd.clear();
+                    
+                           lcd.print("Image too messy");
+                    
+                          return p;
+                    
+                        case FINGERPRINT_PACKETRECIEVEERR:
+                    
+                          //Serial.println("Communication error");
+                    
+                                lcd.clear();
+                    
+                          lcd.print("Comm Error");
+                    
+                          return p;
+                    
+                        case FINGERPRINT_FEATUREFAIL:
+                    
+                          //Serial.println("Could not find fingerprint features");
+                    
+                                lcd.clear();
+                    
+                          lcd.print("Feature Not Found");
+                    
+                          return p;
+                    
+                        case FINGERPRINT_INVALIDIMAGE:
+                    
+                          //Serial.println("Could not find fingerprint features");
+                    
+                                      lcd.clear();
+                    
+                          lcd.print("Feature Not Found");
+                    
+                          return p;
+                    
+                        default:
+                    
+                          //Serial.println("Unknown error");
+                    
+                                      lcd.clear();
+                    
+                          lcd.print("Unknown Error");
+                    
+                          return p;
+                    
+                      }
+                    
+                      
+                    
+                      //Serial.println("Remove finger");
+                    
+                      lcd.clear();
+                    
+                      lcd.print("Remove Finger");
+                    
+                      delay(2000);
+                    
+                      p = 0;
+                    
+                      while (p != FINGERPRINT_NOFINGER) {
+                    
+                        p = finger.getImage();
+                    
+                      }
+                    
+                      //Serial.print("ID "); //Serial.println(id);
+                    
+                      p = -1;
+                    
+                      //Serial.println("Place same finger again");
+                    
+                       lcd.clear();
+                    
+                          lcd.print("Place Finger");
+                    
+                          lcd.setCursor(0,1);
+                    
+                          lcd.print("   Again");
+                    
+                      while (p != FINGERPRINT_OK) {
+                    
+                        p = finger.getImage();
+                    
+                        switch (p) {
+                    
+                        case FINGERPRINT_OK:
+                    
+                          //Serial.println("Image taken");
+                    
+                          break;
+                    
+                        case FINGERPRINT_NOFINGER:
+                    
+                          //Serial.print(".");
+                    
+                          break;
+                    
+                        case FINGERPRINT_PACKETRECIEVEERR:
+                    
+                          //Serial.println("Communication error");
+                    
+                          break;
+                    
+                        case FINGERPRINT_IMAGEFAIL:
+                    
+                          //Serial.println("Imaging error");
+                    
+                          break;
+                    
+                        default:
+                    
+                          //Serial.println("Unknown error");
+                    
+                          return;
+                    
+                        }
+                    
+                      }
+                    
+                     
+                    
+                      // OK success!
+                    
+                     
+                    
+                      p = finger.image2Tz(2);
+                    
+                      switch (p) {
+                    
+                        case FINGERPRINT_OK:
+                    
+                          //Serial.println("Image converted");
+                    
+                          break;
+                    
+                        case FINGERPRINT_IMAGEMESS:
+                    
+                          //Serial.println("Image too messy");
+                    
+                          return p;
+                    
+                        case FINGERPRINT_PACKETRECIEVEERR:
+                    
+                          //Serial.println("Communication error");
+                    
+                          return p;
+                    
+                        case FINGERPRINT_FEATUREFAIL:
+                    
+                          //Serial.println("Could not find fingerprint features");
+                    
+                          return p;
+                    
+                        case FINGERPRINT_INVALIDIMAGE:
+                    
+                          //Serial.println("Could not find fingerprint features");
+                    
+                          return p;
+                    
+                        default:
+                    
+                          //Serial.println("Unknown error");
+                    
+                          return p;
+                    
+                      }
+                    
+                      
+                    
+                      // OK converted!
+                    
+                      //Serial.print("Creating model for #");  //Serial.println(id);
+                    
+                      
+                    
+                      p = finger.createModel();
+                    
+                      if (p == FINGERPRINT_OK) {
+                    
+                        //Serial.println("Prints matched!");
+                    
+                      } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
+                    
+                        //Serial.println("Communication error");
+                    
+                        return p;
+                    
+                      } else if (p == FINGERPRINT_ENROLLMISMATCH) {
+                    
+                        //Serial.println("Fingerprints did not match");
+                    
+                        return p;
+                    
+                      } else {
+                    
+                        //Serial.println("Unknown error");
+                    
+                        return p;
+                    
+                      }   
+                    
+                      
+                    
+                      //Serial.print("ID "); //Serial.println(id);
+                    
+                      p = finger.storeModel(id);
+                    
+                      if (p == FINGERPRINT_OK) {
+                    
+                        //Serial.println("Stored!");
+                    
+                        lcd.clear();
+                    
+                        lcd.print("Stored!");
+                    
+                        delay(2000);
+                    
+                      } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
+                    
+                        //Serial.println("Communication error");
+                    
+                        return p;
+                    
+                      } else if (p == FINGERPRINT_BADLOCATION) {
+                    
+                        //Serial.println("Could not store in that location");
+                    
+                        return p;
+                    
+                      } else if (p == FINGERPRINT_FLASHERR) {
+                    
+                        //Serial.println("Error writing to flash");
+                    
+                        return p;
+                    
+                      }
+                    
+                      else {
+                    
+                        //Serial.println("Unknown error");
+                    
+                        return p;
+                    
+                      }   
+                    
+                    }
+                    
+                     
+                    
+                    int getFingerprintIDez()
+                    
+                    {
+                    
+                      uint8_t p = finger.getImage();
+                    
+                      
+                    
+                      if (p != FINGERPRINT_OK)  
+                    
+                      return -1;
+                    
+                     
+                    
+                      p = finger.image2Tz();
+                    
+                      if (p != FINGERPRINT_OK)  
+                    
+                      return -1;
+                    
+                     
+                    
+                      p = finger.fingerFastSearch();
+                    
+                      if (p != FINGERPRINT_OK)
+                    
+                      {
+                    
+                       lcd.clear();
+                    
+                       lcd.print("Finger Not Found");
+                    
+                       lcd.setCursor(0,1);
+                    
+                       lcd.print("Try Later");
+                    
+                       delay(2000);  
+                    
+                      return -1;
+                    
+                      }
+                    
+                      // found a match!
+                    
+                      //Serial.print("Found ID #"); 
+                    
+                      //Serial.print(finger.fingerID); 
+                    
+                      return finger.fingerID; 
+                    
+                    }
+                    
+                     
+                    
+                    uint8_t deleteFingerprint(uint8_t id) 
+                    
+                    {
+                    
+                      uint8_t p = -1;  
+                    
+                      lcd.clear();
+                    
+                      lcd.print("Please wait");
+                    
+                      p = finger.deleteModel(id);
+                    
+                      if (p == FINGERPRINT_OK) 
+                    
+                      {
+                    
+                        //Serial.println("Deleted!");
+                    
+                        lcd.clear();
+                    
+                        lcd.print("Figer Deleted");
+                    
+                        lcd.setCursor(0,1);
+                    
+                        lcd.print("Successfully");
+                    
+                        delay(1000);
+                    
+                      } 
+                    
+                      
+                    
+                      else 
+                    
+                      {
+                    
+                        //Serial.print("Something Wrong"); 
+                    
+                        lcd.clear();
+                    
+                        lcd.print("Something Wrong");
+                    
+                        lcd.setCursor(0,1);
+                    
+                        lcd.print("Try Again Later");
+                    
+                        delay(2000);
+                    
+                        return p;
+                    
+                      }   
+                    
+                    }
+                    
+                     
+                    
+                    void Vote()
+                    
+                    {
+                    
+                      lcd.clear();
+                    
+                      lcd.print("Please Place");
+                    
+                      lcd.setCursor(0,1);
+                    
+                      lcd.print("Your Vote");
+                    
+                      digitalWrite(indVote, HIGH);
+                    
+                      digitalWrite(indFinger, LOW);
+                    
+                      digitalWrite(buzzer, HIGH);
+                    
+                      delay(500);
+                    
+                      digitalWrite(buzzer, LOW);
+                    
+                      delay(1000);
+                    
+                      while(1)
+                    
+                      {
+                    
+                            if(digitalRead(sw1)==0)
+                    
+                            {
+                    
+                              vote1++;
+                    
+                              voteSubmit(1);
+                    
+                              EEPROM.write(0, vote1);
+                    
+                              while(digitalRead(sw1)==0);
+                    
+                              return;
+                    
+                            }
+                    
+                            if(digitalRead(sw2)==0)
+                    
+                            {
+                    
+                              vote2++;
+                    
+                                voteSubmit(2);
+                    
+                                EEPROM.write(1, vote2);
+                    
+                              while(digitalRead(sw2)==0);
+                    
+                              return;
+                    
+                            }
+                    
+                            if(digitalRead(sw3)==0)
+                    
+                            {
+                    
+                              vote3++;
+                    
+                                 voteSubmit(3);
+                    
+                                 EEPROM.write(2, vote3);
+                    
+                              while(digitalRead(sw3)==0);
+                    
+                              return;
+                    
+                            }
+                    
+                            
+                    
+                             if(digitalRead(resultsw)==0)
+                    
+                             {
+                    
+                                  lcd.clear();
+                    
+                                  lcd.setCursor(0,0);
+                    
+                                  lcd.print("Can1");
+                    
+                                  lcd.setCursor(6,0);
+                    
+                                  lcd.print("Can2");
+                    
+                                  lcd.setCursor(12,0);
+                    
+                                  lcd.print("Can3");
+                    
+                                  for(int i=0;i<3;i++)
+                    
+                                  {
+                    
+                                    lcd.setCursor(i*6,1);
+                    
+                                    lcd.print(EEPROM.read(i));
+                    
+                                  }
+                    
+                                  delay(2000);
+                    
+                               int vote=vote1+vote2+vote3;
+                    
+                               if(vote)
+                    
+                               {
+                    
+                                if((vote1 > vote2 && vote1 > vote3))
+                    
+                                {
+                    
+                                 lcd.clear();
+                    
+                                 lcd.print("Can1 Wins");
+                    
+                                 delay(2000);
+                    
+                                 lcd.clear();
+                    
+                                }
+                    
+                                else if(vote2 > vote1 && vote2 > vote3)
+                    
+                                {
+                    
+                                 lcd.clear();
+                    
+                                 lcd.print("Can2 Wins");
+                    
+                                 delay(2000);
+                    
+                                 lcd.clear();
+                    
+                                }
+                    
+                                else if((vote3 > vote1 && vote3 > vote2))
+                    
+                                {
+                    
+                                 lcd.clear();
+                    
+                                 lcd.print("Can3 Wins");
+                    
+                                 delay(2000);
+                    
+                                 lcd.clear();
+                    
+                                }
+                    
+                               
+                    
+                               else
+                    
+                               {
+                    
+                                 lcd.clear();
+                    
+                                 lcd.print("   Tie Up Or   ");
+                    
+                                 lcd.setCursor(0,1);
+                    
+                                 lcd.print("   No Result   ");
+                    
+                                 delay(1000);
+                    
+                                 lcd.clear();
+                    
+                               }
+                    
+                               
+                    
+                              }      
+                    
+                               else 
+                    
+                               {
+                    
+                                 lcd.clear();
+                    
+                                 lcd.print("No Voting....");
+                    
+                                 delay(1000);
+                    
+                                 lcd.clear();
+                    
+                               }
+                    
+                               vote1=0;vote2=0;vote3=0;vote=0;
+                    
+                               lcd.clear();
+                    
+                               return;
+                    
+                             }
+                    
+                      }
+                    
+                       digitalWrite(indVote, LOW);
+                    
+                    }
+                    
+                     
+                    
+                    void voteSubmit(int cn)
+                    
+                    {
+                    
+                      lcd.clear();
+                    
+                      if(cn == 1)
+                    
+                          lcd.print("Can1");
+                    
+                      else if(cn == 2)
+                    
+                          lcd.print("Can2");
+                    
+                      else if(cn == 3)
+                    
+                          lcd.print("Can3");
+                    
+                      lcd.setCursor(0,1);
+                    
+                      lcd.print("Vote Submitted");
+                    
+                      digitalWrite(buzzer , HIGH);
+                    
+                      delay(1000);
+                    
+                      digitalWrite(buzzer, LOW);
+                    
+                      digitalWrite(indVote, LOW);
+                    
+                      return;
+                    
+                    }
+                    
+            </pre>  
+    </div>
+    <footer><b>Referenced By :</b>CircuitDigest</footer>
+  </section>
+
+
+  <script >
+  // JavaScript for Copy Button
+    document.getElementById("copyButton").addEventListener("click", function() {
+      // Select the text inside the pre element
+      var codeContent = document.getElementById("codeContent");
+      var range = document.createRange();
+      range.selectNode(codeContent);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+    
+      // Copy the selected text
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copying text command was ' + msg);
+      } catch (err) {
+        console.log('Unable to copy text');
+      }
+    
+      // Remove the selection
+      window.getSelection().removeAllRanges();
+    });
+    </script>
+</body>
+
+</html>
