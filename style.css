@@ -66,6 +66,26 @@ section {
 
 }
 
+.home-img {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.home-img img {
+    width: 400px;
+    height: auto;
+    margin-bottom: 30%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0));
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0));
+}
+
+
+
 .scroll {
     margin-bottom: 20px;
 }
@@ -141,6 +161,14 @@ section {
     background: #1f1f3c;
 }
 
+.about .text p {
+    max-width: 1050px;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
 
 /*project*/
 
@@ -181,8 +209,9 @@ section {
 
 .layer p {
     color: #fff;
-    font-size: 1.8rem;
-    line-height: 1.8;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    text-align: center;
 
 }
 
@@ -195,6 +224,14 @@ section {
 
 
 }
+
+.ptoject-container img {
+    width: 100%;
+    height: 250px; /* You can adjust this value if needed */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
 
 .circle {
     background-color: #fff;
@@ -405,6 +442,20 @@ form textarea {
         margin-left: 0;
     }
 
+    @media only screen and (max-width: 830px) {
+    .home-img {
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .home-img img {
+        width: 250px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+}
+
+
     /* About Section */
     .about {
         padding: 80px 15px;
@@ -455,3 +506,155 @@ form textarea {
             margin: auto;
         }
     }
+
+    /* ------------- Responsive Design -------------- */
+
+/* Laptop & Tablet */
+@media (max-width: 1024px) {
+    section {
+        padding: 120px 8% 100px;
+    }
+
+    .home-img img {
+        width: 300px;
+    }
+
+    .hometext h1 {
+        font-size: 40px;
+    }
+
+    .hometext h3 {
+        font-size: 1.8rem;
+    }
+
+    .hometext p {
+        font-size: 1.05rem;
+    }
+
+    .layer h3 {
+        font-size: 22px;
+    }
+
+    .layer p {
+        font-size: 16px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .home {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 100px;
+    }
+
+    .home-img {
+        padding-right: 0;
+        justify-content: center;
+    }
+
+    .home-img img {
+        width: 220px;
+        margin-bottom: 20px;
+    }
+
+    .hometext h1 {
+        font-size: 35px;
+    }
+
+    .hometext h3 {
+        font-size: 1.6rem;
+    }
+
+    .projects {
+        padding: 80px 5%;
+    }
+
+    .ptoject-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .contact {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-text h2 {
+        font-size: 40px;
+    }
+
+    .contact-text p {
+        font-size: 16px;
+    }
+
+    .contact-icons {
+        justify-content: center;
+    }
+
+    .contact-form form {
+        max-width: 90%;
+        margin: auto;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    section {
+        padding: 80px 5% 60px;
+    }
+
+    .home-img img {
+        width: 180px;
+    }
+
+    .hometext h1 {
+        font-size: 30px;
+    }
+
+    .hometext h3 {
+        font-size: 1.4rem;
+    }
+
+    .hometext p {
+        font-size: 1rem;
+    }
+
+    .ptoject-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .projects img {
+        border-radius: 15px;
+    }
+
+    .layer h3 {
+        font-size: 20px;
+    }
+
+    .layer p {
+        font-size: 14px;
+    }
+
+    .contact-text h2 {
+        font-size: 35px;
+    }
+
+    .contact-text p {
+        font-size: 15px;
+    }
+
+    .btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .top {
+        width: 35px;
+        height: 35px;
+    }
+
+    .arrow {
+        font-size: 22px;
+    }
+}

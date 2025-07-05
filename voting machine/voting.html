@@ -2,12 +2,13 @@
 <html lang="en">
 
 <html>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voting Machine By Finger Print Module</title>
-  <link rel="stylesheet" href="voting.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voting Machine By Finger Print Module</title>
+<link rel="stylesheet" href="voting.css">
+
 </html>
-    
+
 
 <body>
   <section class="head">
@@ -15,7 +16,7 @@
       <h1>Voting Machine By Finger Print Module</h1>
     </header>
     <div class="voting_img">
-      <img src="voting.jpg" alt="">
+      <img src="voting.jpg" alt="" width="600" height="400">
     </div>
 
     <div class="summury">
@@ -130,7 +131,7 @@
         Now LCD will let you know that finger has been deleted successfully.</p>
 
 
-      <img src="flowchart.jpg" alt="">
+      <img src="flowchart.jpg" alt="" width="600" height="400">
     </div>
 
   </section>
@@ -164,7 +165,7 @@
   <section>
     <div class="diagram">
       <h3>Circuit Diagram :</h3>
-      <img src="circuit_diagram.png" alt="">
+      <img src="circuit_diagram.png" alt="" width="600" height="400">
 
     </div>
   </section>
@@ -1472,22 +1473,23 @@
                     
                     }
                     
-            </pre>  
+            </pre>
     </div>
+    <a href="index.html" class="datasheet" style="text-decoration: none;">← Back to Portfolio</a>
     <footer><b>Referenced By :</b>CircuitDigest</footer>
   </section>
 
 
-  <script >
-  // JavaScript for Copy Button
-    document.getElementById("copyButton").addEventListener("click", function() {
+  <script>
+    // JavaScript for Copy Button
+    document.getElementById("copyButton").addEventListener("click", function () {
       // Select the text inside the pre element
       var codeContent = document.getElementById("codeContent");
       var range = document.createRange();
       range.selectNode(codeContent);
       window.getSelection().removeAllRanges();
       window.getSelection().addRange(range);
-    
+
       // Copy the selected text
       try {
         var successful = document.execCommand('copy');
@@ -1496,11 +1498,11 @@
       } catch (err) {
         console.log('Unable to copy text');
       }
-    
+
       // Remove the selection
       window.getSelection().removeAllRanges();
     });
-    </script>
+  </script>
 </body>
 
 </html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Predictive Maintenance System</title>
+  <link rel="stylesheet" href="psm.css">
+</head>
+
+<body>
+
+  <section class="head">
+    <h1>Predictive Maintenance System for Industrial Motors and Pumps</h1>
+    <div class="voting_img">
+      <img src="PSM_thumbnail.png" alt="Predictive Maintenance System" width="600" height="400s">
+    </div>
+
+    <div class="summury">
+      <p>In modern industrial environments, the continuous operation of critical assets such as motors and pumps is essential for productivity, safety, and cost-efficiency. Unexpected failures of these machines can lead to unplanned downtime, reduced output, and financial losses. To address this, industries are increasingly adopting Predictive Maintenance (PdM) strategies powered by IIoT (Industrial Internet of Things).</p>
+      <p>This project implements a smart predictive maintenance system specifically designed for industrial motors and pumps. It leverages real-time data acquisition from sensors like temperature and current/voltage sensors. This data is monitored through cloud dashboards and triggers alerts when operating conditions exceed predefined thresholds, enabling timely preventive action and avoiding machine breakdowns.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="components">
+      <h3>Required Components :</h3>
+      <ol class="list">
+        <li>ESP32 Microcontroller</li>
+        <li>Temperature Sensor (e.g., LM35 / DS18B20)</li>
+        <li>Voltage Sensor Module</li>
+        <li>Current Sensor (e.g., ACS712)</li>
+        <li>OLED / LCD Display</li>
+        <li>Buzzer</li>
+        <li>WiFi Module (Built-in ESP32)</li>
+        <li>Cloud IoT Platform Account (e.g., ThingSpeak / Blynk / Firebase)</li>
+        <li>Connecting Wires</li>
+        <li>Power Supply</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="diagram">
+      <h3>Circuit Diagram :</h3>
+      <img src="image.png" alt="Predictive Maintenance Circuit" width="600" height="400">
+    </div>
+  </section>
+
+  <section>
+    <div class="working">
+      <h3>Working Principle :</h3>
+      <p>The temperature sensor continuously monitors the motor or pump casing temperature. The voltage and current sensors check the supply and operational parameters. The ESP32 fetches data from these sensors and compares it against preset threshold values. If a reading exceeds a safe limit, a buzzer activates immediately and an alert is sent to the connected IoT cloud platform.</p>
+
+      <p>The maintenance engineer can view the live status and historical data through a web dashboard or mobile app. This predictive capability helps prevent sudden machine breakdowns, reduces unplanned downtime, and improves asset life and operational efficiency.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="code">
+      <h3>Embedded Code :</h3>
+      <button id="copyButton">Copy</button>
+      <pre id="codeContent">
+// ESP32 Predictive Maintenance Code (Excerpt)
+
+#include <WiFi.h>
+#include "DHT.h"
+#define DHTPIN 4
+#define DHTTYPE DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
+const char* ssid = "YourSSID";
+const char* password = "YourPassword";
+
+void setup() {
+  Serial.begin(115200);
+  dht.begin();
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("Connected!");
+}
+
+void loop() {
+  float temp = dht.readTemperature();
+  Serial.println(temp);
+  delay(2000);
+}
+      </pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="datasheet-download">
+      <h3>Datasheets :</h3>
+      <a href="Datasheets/ESP8266.PDF" download><button class="datasheet">ESP32 Datasheet</button></a>
+      <a href="Datasheets/LM35.PDF" download><button class="datasheet">LM35 Datasheet</button></a>
+      <a href="Datasheets/LM124.PDF" download><button class="datasheet">LM124 Datasheet</button></a>
+      <a href="Datasheets/ATMEGA48P.PDF" download><button class="datasheet">Atmega328P Datasheet</button></a>
+    </div>
+    
+  </section>
+
+  <a href="index.html" class="datasheet" style="text-decoration: none; margin-left: 10%;">← Back to Portfolio</a>
+
+
+
+  <footer>
+    <b>Referenced By :</b> CircuitDigest, RandomNerdTutorials
+  </footer>
+
+  <script>
+    document.getElementById("copyButton").addEventListener("click", function () {
+      var codeContent = document.getElementById("codeContent");
+      var range = document.createRange();
+      range.selectNode(codeContent);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      try {
+        document.execCommand('copy');
+        alert("Code copied to clipboard!");
+      } catch (err) {
+        console.log('Unable to copy text');
+      }
+      window.getSelection().removeAllRanges();
+    });
+  </script>
+
+</body>
+
+</html>

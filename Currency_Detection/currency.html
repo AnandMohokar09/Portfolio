@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Detection for the Visually Impaired</title>
+    <link rel="stylesheet" href="currency.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Currency Detection for the Visually Impaired</h1>
+
+        <img src="./images/Currency.png" alt="Currency Detection Project Image" class="project-img">
+
+        <h2>Introduction</h2>
+        <p class="discription">In day-to-day financial transactions, identifying currency denominations is a simple yet essential activity for most individuals. However, for visually impaired people, this seemingly ordinary task poses a significant challenge. In India, the currency notes of different denominations have similar physical dimensions, making it difficult to distinguish between them by touch alone. Although there are minor variations in color and certain tactile marks on newer notes, these features are often insufficient for accurate identification — especially under varied lighting conditions or with worn-out notes.
+
+Many visually impaired individuals rely on the assistance of others when handling cash, which not only compromises their financial independence but also exposes them to the risk of fraud or financial mishandling. While digital payment systems are growing, cash transactions remain common, especially in rural and semi-urban areas where smartphone penetration and digital literacy levels are still evolving.
+
+Additionally, most existing assistive solutions for currency recognition are either expensive, bulky, or difficult to operate for the average user. There remains a need for an affordable, portable, and easy-to-use system that can quickly and accurately identify Indian currency notes and provide reliable feedback to visually impaired individuals — empowering them to conduct financial transactions with confidence and autonomy.
+
+This project aims to address this pressing issue by developing a Currency Detection System for Visually Impaired People, which uses a color sensor and audio output system to detect the denomination of a currency note based on its color properties and announce the result through a speaker or earphones.</p>
+
+        <h2>Problem Statement</h2>
+        <p class="discription">Visually impaired people often struggle to identify currency notes during financial transactions. This increases their dependency on others, risking financial mishandling or fraud.</p>
+
+        <h2>Proposed Solution</h2>
+        <p class="discription">The proposed solution is a portable, easy-to-use electronic system capable of identifying Indian currency notes by detecting their color patterns and announcing their denomination through voice feedback.</p>
+
+        <h2>System Overview</h2>
+        <p class="discription">The system uses a <b>TCS3200 Color Sensor</b> to detect the color combination of the note placed before it. The detected RGB values are processed by an <b>Arduino Uno</b> (or ARM controller), and based on predefined values for each note, an appropriate audio file stored in a <b>DFPlayer Mini</b> is played through a speaker.</p>
+
+        <h2>Working</h2>
+        <ol>
+            <li>The user places a currency note under the color sensor.</li>
+            <li>The sensor reads the RGB color values of the note.</li>
+            <li>The microcontroller compares the values against stored ranges for ₹10, ₹20, ₹50, ₹100, ₹200, and ₹500 notes.</li>
+            <li>The DFPlayer Mini plays a pre-recorded voice announcement indicating the denomination.</li>
+        </ol>
+
+        <h2>Features</h2>
+        <ul>
+            <li>Accurate detection of note denominations based on color patterns.</li>
+            <li>Clear voice output via speaker or earphone.</li>
+            <li>Compact, lightweight, and battery-powered design.</li>
+            <li>Simple operation for visually impaired individuals without complex instructions.</li>
+            <li>Can be expanded for other currencies or denominations.</li>
+        </ul>
+
+        <h2>Components & Technologies Used</h2>
+        <ul>
+            <li>Arduino Uno / ARM Controller</li>
+            <li>TCS3200 Color Sensor</li>
+            <li>DFPlayer Mini MP3 Module</li>
+            <li>Micro SD Card with voice files</li>
+            <li>Speaker / Headphone</li>
+            <li>Push Button (optional)</li>
+            <li>Battery Power Supply</li>
+            <li>Embedded C Programming / Arduino IDE</li>
+        </ul>
+
+        <h2>Future Scope</h2>
+        <p class="discription">This system can be further enhanced by integrating an Android app for remote control, adding Braille support, and incorporating advanced object detection or QR code scanning for more reliable results in low-light conditions.</p>
+
+        <h2>Conclusion</h2>
+        <p class="discription">The project successfully delivers a practical, affordable, and user-friendly solution for visually impaired individuals, enabling them to independently identify currency notes and manage financial transactions securely.</p>
+
+        <h2>Outcome</h2>
+        <p class="discription">The prototype accurately detects ₹10, ₹20, ₹50, ₹100, ₹200, and ₹500 notes and provides clear voice feedback. The system is portable and performs consistently, improving independence and confidence for visually impaired users during financial transactions.</p>
+
+        <h2>Project Code</h2>
+
+<div class="code-box">
+<pre><code>
+#include "SoftwareSerial.h"
+#include "DFRobotDFPlayerMini.h"
+
+static const uint8_t PIN_MP3_TX = 5; 
+static const uint8_t PIN_MP3_RX = 4;  
+SoftwareSerial softwareSerial(PIN_MP3_RX, PIN_MP3_TX);
+
+// Create the Player object
+DFRobotDFPlayerMini player;
+
+// Pin Definitions for color sensor (TCS3200 example)
+const int S0 = 12;
+const int S1 = 13;
+const int S2 = 6;
+const int S3 = 11;
+const int sensorOut = 7;
+
+int redValue = 0;
+int greenValue = 0;
+int blueValue = 0;
+
+void setup() {
+  // Init USB serial port for debugging
+  Serial.begin(9600);
+  // Init serial port for DFPlayer Mini
+  softwareSerial.begin(9600);
+
+  // Start communication with DFPlayer Mini
+  if (player.begin(softwareSerial)) {
+    Serial.println("DFPlayer Mini OK");
+    player.volume(30); 
+  } else {
+    Serial.println("Connecting to DFPlayer Mini failed!");
+  }
+
+  // Initialize color sensor pins
+  pinMode(S0, OUTPUT);
+  pinMode(S1, OUTPUT);
+  pinMode(S2, OUTPUT);
+  pinMode(S3, OUTPUT);
+  pinMode(sensorOut, INPUT);
+
+  // Set frequency scaling to 20%
+  digitalWrite(S0, HIGH);
+  digitalWrite(S1, LOW);
+}
+
+void loop() {
+  Serial.println("Scanning...");
+  
+  // Read Red
+  digitalWrite(S2, LOW);
+  digitalWrite(S3, LOW);
+  redValue = pulseIn(sensorOut, LOW);
+
+  // Read Green
+  digitalWrite(S2, HIGH);
+  digitalWrite(S3, HIGH);
+  greenValue = pulseIn(sensorOut, LOW);
+
+  // Read Blue
+  digitalWrite(S2, LOW);
+  digitalWrite(S3, HIGH);
+  blueValue = pulseIn(sensorOut, LOW);
+
+  // Print the RGB values for debugging
+  Serial.print("R = ");
+  Serial.print(redValue);
+  Serial.print(" G = ");
+  Serial.print(greenValue);
+  Serial.print(" B = ");
+  Serial.println(blueValue);
+  
+  // Conditions for currency detection
+  if ((redValue >= 29 && redValue <= 31) &&
+         (greenValue >= 41 && greenValue <= 44) &&
+         (blueValue >= 40 && blueValue <= 43)) {
+    Serial.println("10Rs note detected");
+    player.play(6); // Play 10Rs sound
+}
+
+
+else if ((redValue >= 30 && redValue <= 33) &&
+         (greenValue >= 37 && greenValue <= 40) &&
+         (blueValue >= 43 && blueValue <= 49)) {
+  Serial.println("20Rs note detected");
+  player.play(2); // Play sound for 20Rs
+}
+ 
+else if ((redValue >= 30 && redValue <= 39) &&
+         (greenValue >= 31 && greenValue <= 37) &&
+         (blueValue >= 28 && blueValue <= 33)) {
+    Serial.println("50Rs note detected");
+    player.play(3); // Play 50Rs sound
+}
+
+ else if ((redValue >= 31 && redValue <= 36) &&
+         (greenValue >= 37 && greenValue <= 43) &&
+         (blueValue >= 26 && blueValue <= 30)) {
+    Serial.println("100Rs note detected");
+    player.play(1); // Play 100Rs sound
+}
+
+
+else if ((redValue >= 24 && redValue <= 26) &&
+         (greenValue >= 41 && greenValue <= 43) &&
+         (blueValue >= 41 && blueValue <= 44)) {
+    Serial.println("200Rs note detected");
+    player.play(4); // Play 200Rs sound
+}
+
+ else if ((redValue >= 37 && redValue <= 44) &&
+    (greenValue >= 43 && greenValue <= 53) &&
+    (blueValue >= 40 && blueValue <= 49)) {
+  Serial.println("500Rs note detected");
+  player.play(5); // Play 500Rs sound
+  }
+  else {
+    Serial.println("Fake note");
+  }
+  
+  delay(3000); // Delay for readability
+}
+</code></pre>
+</div>
+
+<h2>Download Datasheets</h2>
+<ul class="datasheet-list">
+    <li><a href="Data_Sheets/TCS3200.PDF" download>📄 TCS3200 Color Sensor Datasheet</a></li>
+    <li><a href="Data_Sheets/DFPlayer Mini Manual.pdf" download>📄 DFPlayer Mini MP3 Module Datasheet</a></li>
+    <li><a href="Data_Sheets/ATMEGA48P.PDF" download>📄 Arduino Uno Datasheet</a></li>
+</ul>   
+
+        <a href="index.html" class="back-btn">← Back to Portfolio</a>
+
+        
+    </div>
+
+        
+
+</body>
+</html>
